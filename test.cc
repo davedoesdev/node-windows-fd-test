@@ -1,4 +1,5 @@
 #include <nan.h>
+#include <io.h>
 
 using namespace v8;
 
@@ -9,17 +10,28 @@ static NAN_METHOD(Test)
         return Nan::ThrowTypeError("Bad argument");
     }
 
-    HANDLE handle = _get_osfhandle(info[0]->ToInt32());
+    HANDLE handle = (HANDLE) _get_osfhandle(info[0]->Int32Value());
 
-    if (handle == -1)
+    if (handle == (HANDLE) -1)
     {
         return Nan::ThrowError(Nan::ErrnoException(errno));    
     }
 }
 
+static void uv__crt_invalid_parameter_handler(const wchar_t* expression,
+                                              const wchar_t* function,
+					      const wchar_t * file,
+					      unsigned int line,
+                                              uintptr_t reserved)
+{
+  /* No-op. */
+}
+
 extern "C"
 NAN_MODULE_INIT(init)
 {
+    _set_invalid_parameter_handler(uv__crt_invalid_parameter_handler);
+
     target->Set(Nan::New<String>("test").ToLocalChecked(),
                 Nan::New<FunctionTemplate>(Test)->GetFunction());
 }
