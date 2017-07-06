@@ -1,5 +1,4 @@
 #include <nan.h>
-#include <io.h>
 
 using namespace v8;
 
@@ -10,7 +9,7 @@ static NAN_METHOD(Test)
         return Nan::ThrowTypeError("Bad argument");
     }
 
-    HANDLE handle = (HANDLE) _get_osfhandle(info[0]->Int32Value());
+    HANDLE handle = (HANDLE) uv_get_osfhandle(info[0]->Int32Value());
 
     if (handle == (HANDLE) -1)
     {
