@@ -1,5 +1,5 @@
-Shows [`_get_osfhandle`](https://msdn.microsoft.com/en-us/library/ks2530z6.aspx)
-failing on Windows due to MSVCR being statically linked into Node.
+Shows [`uv_osfhandle`](https://github.com/libuv/libuv/pull/1323) works on
+Windows.
 
 To run, clone this repo then:
 
@@ -7,8 +7,6 @@ To run, clone this repo then:
 npm install
 node test.js
 ```
+You should see nothing if it works.
 
-You'll see it throw a `EBADF` exception because `_get_osfhandle` can't find
-the file descriptor opened in Javascript. This is because the file descriptor
-to handle map in the add-on is separate to the one statically linked into the
-Node executable.
+Tested using Node 8.1.3 on Windows 10.
