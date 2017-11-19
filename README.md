@@ -9,4 +9,4 @@ node test.js
 ```
 You should see nothing if it works.
 
-Tested using Node 8.1.3 on Windows 10.
+Tested using Node 6.12.0 and 8.9.1 on Windows 10 and Windows Server 2012 R2.
