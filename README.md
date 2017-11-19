@@ -1,3 +1,5 @@
+# node-windows-fs-test&nbsp;&nbsp;&nbsp;[![Build status](https://ci.appveyor.com/api/projects/status/y4a096ppu5xvm23q?svg=true)](https://ci.appveyor.com/project/davedoesdev/node-windows-fd-test)
+
 Shows [`uv_osfhandle`](https://github.com/libuv/libuv/pull/1323) works on
 Windows.
 
