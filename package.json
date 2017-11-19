@@ -1,4 +1,6 @@
 {
+  "name": "windows-fd-test",
+  "version": "0.0.1",
   "dependencies": {
     "nan": "^2.0"
   }
