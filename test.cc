@@ -9,7 +9,7 @@ static NAN_METHOD(Test)
         return Nan::ThrowTypeError("Bad argument");
     }
 
-    HANDLE handle = (HANDLE) uv_get_osfhandle(info[0]->Int32Value());
+    HANDLE handle = (HANDLE) uv_get_osfhandle(info[0].As<v8::Int32>()->Value());
 
     if (handle == (HANDLE) -1)
     {
@@ -31,8 +31,7 @@ NAN_MODULE_INIT(init)
 {
     _set_invalid_parameter_handler(uv__crt_invalid_parameter_handler);
 
-    target->Set(Nan::New<String>("test").ToLocalChecked(),
-                Nan::New<FunctionTemplate>(Test)->GetFunction());
+    Export(target, "test", Test);
 }
 
 NODE_MODULE(test, init)
